@@ -14,47 +14,42 @@
   //----------//
   // HANDLERS //
   //----------//
-  // LEFT submit button
-  document.querySelector('#submitLeft').onclick = () => {
-    animInputBox('#inputDivLeft');
-    const input = document.querySelector('#inputLeft').value;
-    const country = input.split(',').pop();
-    const cityName = input.split(',').shift();
-    const city = document.querySelector('#inputLeft').value;
-    const photos = getPhotos(cityName).catch(error);
-    const weather = getWeather(city, country).catch(error);
-    const forecast = getForecast(city, country).catch(error);
-    printWeather(weather, forecast, 'Left');
-    printForecast(forecast, cityName, 'Left');
-    printPhotos(photos, cityName);
-  };
+  // Submit Buttons PUSH
+  const submit = document.querySelectorAll(`.SUBMIT`);
+  submit.forEach(
+    (button) =>
+      (button.onclick = () => {
+        const side = button.value;
+        animInputBox(side);
+        const input = document.querySelector(`#input${side}`).value;
+        const country = input.split(',').pop();
+        const cityName = input.split(',').shift();
+        const city = document.querySelector(`#input${side}`).value;
+        const weather = getWeather(city, country).catch(error);
+        const forecast = getForecast(city, country).catch(error);
+        printWeather(weather, forecast, side);
+        printForecast(forecast, cityName, side);
 
-  // RIGHT submit button
-  document.querySelector('#submitRight').onclick = () => {
-    animInputBox('#inputDivRight');
-    const input = document.querySelector('#inputRight').value;
-    const country = input.split(',').pop();
-    const cityName = input.split(',').shift();
-    const city = document.querySelector('#inputRight').value;
-    const weather = getWeather(city, country).catch(error);
-    const forecast = getForecast(city, country).catch(error);
-    printWeather(weather, forecast, 'Right');
-    printForecast(forecast, cityName, 'Right');
-  };
+        if (side === 'Left') {
+          const photos = getPhotos(cityName).catch(error);
+          printPhotos(photos, cityName);
+        }
+      })
+  );
 
-  // Chart ON/OFF
+  // Forecast ON/OFF
   document.querySelector('#forecastControl').onclick = () => {
-    animForecast();
+    toggleForecast();
   };
 
   // Compare ON/OFF
   document.querySelector('#compareControl').onclick = () => {
-    animCompare();
+    toggleCompare();
   };
 
   // Photos ON/OFF
   document.querySelector('#photosControl').onclick = () => {
-    animPhotos();
+    togglePhotos();
   };
 
   // AlertBox Click
@@ -175,22 +170,20 @@
     }
     return windDir;
   }
-
-  // ANIMATION & SOUND
-  // Input Div
+  // Input Box
   function animInputBox(id) {
     // Sound
     const audio = new Audio('audio/tick.mp3');
     audio.play();
     // Animate
-    document.querySelector(id).classList.add('animate-bounce');
+    document.querySelector(`#inputDiv${id}`).classList.add('animate-bounce');
     const timeout = setTimeout(() => {
-      document.querySelector(id).classList.remove('animate-bounce');
+      document.querySelector(`#inputDiv${id}`).classList.remove('animate-bounce');
       clearTimeout(timeout);
     }, 1520);
   }
   // Alert Box
-  function animAlert(message) {
+  function toggleAlert() {
     const alertDiv = document.querySelector('#alertDiv');
     if (ALERT_CLICK === 1) {
       alertDiv.classList.remove('hidden');
@@ -198,7 +191,7 @@
     }
   }
   // Forecast Section
-  function animForecast() {
+  function toggleForecast() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
     audioWhoop.play();
@@ -232,7 +225,7 @@
     }
   }
   // Compare Section
-  function animCompare() {
+  function toggleCompare() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
     audioWhoop.play();
@@ -280,7 +273,7 @@
     }
   }
   // Photos Section
-  function animPhotos() {
+  function togglePhotos() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
     audioWhoop.play();
@@ -589,11 +582,12 @@
     // Click Info Box Per Segment
     const allSegments = document.querySelectorAll(`.segment${id}`);
     const alertMsg = document.querySelector('#alertMessage');
-    allSegments.forEach((segment, i) =>
-      segment.addEventListener('click', () => {
-        alertMsg.innerHTML = alertMessage[i];
-        animAlert(alertMessage[i]);
-      })
+    allSegments.forEach(
+      (segment, i) =>
+        (segment.onclick = () => {
+          alertMsg.innerHTML = alertMessage[i];
+          toggleAlert();
+        })
     );
   }
 
