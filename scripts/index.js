@@ -2,7 +2,7 @@
   //---------//
   // GLOBALS //
   //---------//
-  let alertBoxClick = 1;
+  let ALERT_CLICK = 1;
 
   //---------//
   // ON LOAD //
@@ -29,9 +29,9 @@
   //----------//
   // HANDLERS //
   //----------//
-  // Handle LEFT submit button
+  // LEFT submit button
   document.querySelector('#submitLeft').onclick = () => {
-    animInput('#inputDivLeft');
+    animInputBox('#inputDivLeft');
     const input = document.querySelector('#inputLeft').value;
     const country = input.split(',').pop();
     const cityName = input.split(',').shift();
@@ -39,18 +39,21 @@
     const photos = getPhotos(cityName).catch(error);
     const weather = getWeather(city, country).catch(error);
     const forecast = getForecast(city, country).catch(error);
-    printTemp(weather, forecast, 'Left');
+    printWeather(weather, forecast, 'Left');
+    printForecast(forecast, cityName, 'Left');
     printPhotos(photos, cityName);
   };
-  // Handle RIGHT submit button
+  // RIGHT submit button
   document.querySelector('#submitRight').onclick = () => {
-    animInput('#inputDivRight');
+    animInputBox('#inputDivRight');
     const input = document.querySelector('#inputRight').value;
     const country = input.split(',').pop();
+    const cityName = input.split(',').shift();
     const city = document.querySelector('#inputRight').value;
     const weather = getWeather(city, country).catch(error);
     const forecast = getForecast(city, country).catch(error);
-    printTemp(weather, forecast, 'Right');
+    printWeather(weather, forecast, 'Right');
+    printForecast(forecast, cityName, 'Right');
   };
   // Chart ON/OFF
   document.querySelector('#forecastControl').onclick = () => {
@@ -64,16 +67,16 @@
   document.querySelector('#photosControl').onclick = () => {
     animPhotos();
   };
-  // Handle AlertBox Click
+  // AlertBox Click
   document.querySelector('#alertDiv').onclick = () => {
     const alert = document.querySelector('#alertDiv');
     alert.classList.add('hidden');
-    alertBoxClick = 1;
+    ALERT_CLICK = 1;
   };
 
-  // ========== //
-  // FETCH DATA //
-  // ========== //
+  // ============= //
+  // FETCHING DATA //
+  // ============= //
   async function error(error) {
     await error;
     console.error(error);
@@ -131,8 +134,7 @@
       }
     });
   }
-
-  // WIND directional notation (North ,NNE,NE...)
+  // Wind directional notation (North...)
   function windDir(windDegree) {
     let deg = [0];
     for (let i = 0; i < 16; i++) {
@@ -167,7 +169,7 @@
 
   // ANIMATION & SOUND
   // Input Div
-  function animInput(id) {
+  function animInputBox(id) {
     // Sound
     const audio = new Audio('audio/tick.mp3');
     audio.play();
@@ -181,13 +183,12 @@
   // Alert Box
   function animAlert(message) {
     const alertDiv = document.querySelector('#alertDiv');
-    if (alertBoxClick === 1) {
+    if (ALERT_CLICK === 1) {
       alertDiv.classList.remove('hidden');
-      alertBoxClick = 0;
+      ALERT_CLICK = 0;
     }
   }
-
-  // CONTROL SECTION
+  // Forecast Section
   function animForecast() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
@@ -221,7 +222,7 @@
       forecastBoxRight.classList.add('hidden');
     }
   }
-
+  // Compare Section
   function animCompare() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
@@ -269,7 +270,7 @@
       photosControl.classList.add('md:inline');
     }
   }
-
+  // Photos Section
   function animPhotos() {
     // audio
     const audioWhoop = new Audio('audio/whoop.mp3');
@@ -280,6 +281,7 @@
     const photosControl = document.querySelector('#photosControl');
     const photosCheck = document.querySelector('#photosCheck');
     const compareControl = document.querySelector('#compareControl');
+    const iconLeft = document.querySelector('#weatherIconLeft');
 
     // Toggle checkbox on click
     photosCheck.checked ? (photosCheck.checked = false) : (photosCheck.checked = true);
@@ -291,6 +293,8 @@
       main.classList.add('md:grid', 'md:grid-cols-2', 'md:gap-4');
       photosBox.classList.add('md:grid');
       compareControl.classList.remove('md:inline');
+      iconLeft.classList.remove('sm:-translate-y-24', 'sm:w-40');
+      iconLeft.classList.add('lg:-translate-y-24', 'lg:w-40');
     } else {
       //off
       photosControl.classList.remove('bg-green-500', 'border-black');
@@ -298,14 +302,16 @@
       main.classList.remove('md:grid', 'md:grid-cols-2', 'md:gap-4');
       photosBox.classList.remove('md:grid');
       compareControl.classList.add('md:inline');
+      iconLeft.classList.remove('lg:-translate-y-24', 'lg:w-40');
+      iconLeft.classList.add('sm:-translate-y-24', 'sm:w-40');
     }
   }
 
   // ============= //
   // PRINTING HTML //
   // ============= //
-  // PRINT WEATHER & FORECAST
-  async function printTemp(weather, forecast, id) {
+  // PRINT WEATHER
+  async function printWeather(weather, forecast, id) {
     // Wait for Data from API
     const weatherData = await weather;
     const forecastData = await forecast;
@@ -463,10 +469,13 @@
     statusIcon.title = `${description} in ${cityName}`;
     weatherIcon.alt = `${description} icon`;
     weatherIcon.title = `${description} in ${cityName}`;
+  }
 
-    // ===================== //
-    // Print FORECAST [1-39] //
-    // ===================== //
+  // PRINT FORECAST
+  async function printForecast(forecast, city, id) {
+    // Wait for Data from API
+    const forecastData = await forecast;
+    const cityName = city;
 
     // Make individual alert Messages possible
     let alertMessage = [];
@@ -561,7 +570,7 @@
       // Create Descriptive text for each segment
       const describeSegment = `
       <div class="flex flex-wrap">
-        <p class="mx-2"><i>${fullDay} ${hours} at ${cityName}:</i></p><p class="mx-2">Temperature ${temp} and ${description}.</p><p class="mx-2">${windPos}er wind, ${windSpeed}m/s.</p>
+        <p class="mx-2"><i>${fullDay} ${hours} at ${cityName}:</i></p><p class="mx-2">Temperature ${temp} and ${description}.</p><p class="mx-2">${windPos}er wind, ${windSpeed}m/s.</p><p>There is a ${probRain}% chance of rain.</p>
       </div>`;
       alertMessage.push(describeSegment);
     });
@@ -579,7 +588,7 @@
     );
   }
 
-  // PRINT PHOTO
+  // PRINT PHOTOS
   async function printPhotos(photos, city) {
     const photosData = await photos;
     const photosBox = document.querySelector('#photosBox');
