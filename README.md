@@ -1,4 +1,4 @@
-# Weather App 🌤
+# Modern JavaScript App 🌪
 
 [**Live Version**](https://wisecoding.github.io/modern-javascript-application/) - [Project](https://github.com/WiseCoding/modern-javascript-application/projects/1)
 
