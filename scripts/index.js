@@ -1,4 +1,4 @@
-(async () => {
+(() => {
   //---------//
   // GLOBALS //
   //---------//
@@ -7,24 +7,9 @@
   //---------//
   // ON LOAD //
   //---------//
-  // User can press enter to submit both inputs
-  pushEnter();
-
-  // Uncheck check boxes
-  const forecastCheck = document.querySelector('#forecastCheck');
-  const compareCheck = document.querySelector('#compareCheck');
-  const photosCheck = document.querySelector('#photosCheck');
-  forecastCheck.checked = false;
-  compareCheck.checked = false;
-  photosCheck.checked = false;
-
-  // Check previous city, if set, add to input field
-  if (localStorage.getItem('Prev City Left') !== null) {
-    getCity('#inputLeft');
-  }
-  if (localStorage.getItem('Prev City Right') !== null) {
-    getCity('#inputRight');
-  }
+  userPushEnter();
+  unsetControls();
+  setPreviousCity();
 
   //----------//
   // HANDLERS //
@@ -43,6 +28,7 @@
     printForecast(forecast, cityName, 'Left');
     printPhotos(photos, cityName);
   };
+
   // RIGHT submit button
   document.querySelector('#submitRight').onclick = () => {
     animInputBox('#inputDivRight');
@@ -55,18 +41,22 @@
     printWeather(weather, forecast, 'Right');
     printForecast(forecast, cityName, 'Right');
   };
+
   // Chart ON/OFF
   document.querySelector('#forecastControl').onclick = () => {
     animForecast();
   };
+
   // Compare ON/OFF
   document.querySelector('#compareControl').onclick = () => {
     animCompare();
   };
+
   // Photos ON/OFF
   document.querySelector('#photosControl').onclick = () => {
     animPhotos();
   };
+
   // AlertBox Click
   document.querySelector('#alertDiv').onclick = () => {
     const alert = document.querySelector('#alertDiv');
@@ -111,19 +101,8 @@
   //-----------//
   // FUNCTIONS //
   //-----------//
-  // Save/Update submitted city in local storage
-  function getCity(id) {
-    if (localStorage.getItem('Previous City') !== null) {
-      const city = localStorage.getItem('Previous City').toString();
-      document.querySelector(id).value = city;
-    }
-  }
-  // Get previous city from local storage
-  function setCity(city, country, id) {
-    localStorage.setItem(`Prev City ${id}`, `${city}, ${country}`);
-  }
   // Handle enter key push
-  function pushEnter() {
+  function userPushEnter() {
     const html = document.querySelector('html');
     html.addEventListener('keyup', function (enter) {
       // Number 13 is the "Enter" key on the keyboard
@@ -133,6 +112,36 @@
         document.querySelector('#submitRight').click();
       }
     });
+  }
+  // Unset all control buttons
+  function unsetControls() {
+    const forecastCheck = document.querySelector('#forecastCheck');
+    const compareCheck = document.querySelector('#compareCheck');
+    const photosCheck = document.querySelector('#photosCheck');
+    forecastCheck.checked = false;
+    compareCheck.checked = false;
+    photosCheck.checked = false;
+  }
+  // Set previous city name in input fields
+  function setPreviousCity() {
+    // Check previous city, if set, add to input field
+    if (localStorage.getItem('Prev City Left') !== null) {
+      getCity('Left');
+    }
+    if (localStorage.getItem('Prev City Right') !== null) {
+      getCity('Right');
+    }
+  }
+  // Save/Update submitted city in local storage
+  function getCity(id) {
+    if (localStorage.getItem(`Prev City ${id}`) !== null) {
+      const city = localStorage.getItem(`Prev City ${id}`).toString();
+      document.querySelector(`#input${id}`).value = city;
+    }
+  }
+  // Get previous city from local storage
+  function setCity(city, country, id) {
+    localStorage.setItem(`Prev City ${id}`, `${city}, ${country}`);
   }
   // Wind directional notation (North...)
   function windDir(windDegree) {
@@ -539,7 +548,7 @@
           break;
       }
       // Get Temp
-      const temp = `${(interval.main.temp - 273).toFixed(0)}°`;
+      const getTemp = `${(interval.main.temp - 273).toFixed(0)}°`;
       // Get Prob Rain
       const probRain = (interval.pop * 100).toFixed(0);
       // Get Wind Speed & Direction
@@ -562,7 +571,7 @@
             <p>${hours}</p>
           </div>
           <img src="${source}" class="w-8 mx-auto" alt="${description} icon" title="${description} on ${day} at ${hours}" />
-          <p class="text-lg" title="${temp} Celsius at ${fullDay} ${hours} in ${cityName}">${temp}</p>
+          <p class="text-lg" title="${getTemp} Celsius at ${fullDay} ${hours} in ${cityName}">${getTemp}</p>
         </div>
         `;
       forecastPrint += segment;
@@ -570,7 +579,7 @@
       // Create Descriptive text for each segment
       const describeSegment = `
       <div class="flex flex-wrap">
-        <p class="mx-2"><i>${fullDay} ${hours} at ${cityName}:</i></p><p class="mx-2">Temperature ${temp} and ${description}.</p><p class="mx-2">${windPos}er wind, ${windSpeed}m/s.</p><p>There is a ${probRain}% chance of rain.</p>
+        <p class="mx-2"><i>${fullDay} ${hours} at ${cityName}:</i></p><p class="mx-2">Temperature ${getTemp} and ${description}.</p><p class="mx-2">${windPos}er wind, ${windSpeed}m/s.</p><p>There is a ${probRain}% chance of rain.</p>
       </div>`;
       alertMessage.push(describeSegment);
     });
