@@ -1,0 +1,34 @@
+{
+  "name": "modern-javascript-application",
+  "version": "1.0.0",
+  "description": "[**Live Version**](https://wisecoding.github.io/modern-javascript-application/) - [Project](https://github.com/WiseCoding/modern-javascript-application/projects/1)",
+  "main": "index.js",
+  "scripts": {
+    "tailwind": "postcss tailwind.css -o styles/index.css",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WiseCoding/modern-javascript-application.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WiseCoding/modern-javascript-application/issues"
+  },
+  "homepage": "https://github.com/WiseCoding/modern-javascript-application#readme",
+  "dependencies": {
+    "@tailwindcss/typography": "^0.2.0",
+    "@tailwindcss/ui": "^0.5.0",
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^7.1.1",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
