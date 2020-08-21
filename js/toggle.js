@@ -15,7 +15,7 @@ export function toggleForecast() {
     : (forecastCheck.checked = true);
 
   if (forecastCheck.checked) {
-    //on
+    // on
     forecastControl.classList.remove('bg-blue-500', 'border-white');
     forecastControl.classList.add('bg-green-500', 'border-black');
     forecastBoxLeft.classList.remove('hidden');
@@ -23,7 +23,7 @@ export function toggleForecast() {
     forecastBoxRight.classList.remove('hidden');
     forecastBoxRight.classList.add('flex');
   } else {
-    //off
+    // off
     forecastControl.classList.remove('bg-green-500', 'border-black');
     forecastControl.classList.add('bg-blue-500', 'border-white');
     forecastBoxLeft.classList.remove('flex');
@@ -53,7 +53,7 @@ export function toggleCompare() {
   compareCheck.checked ? (compareCheck.checked = false) : (compareCheck.checked = true);
 
   if (compareCheck.checked) {
-    //on
+    // on
     compareControl.classList.remove('bg-blue-500', 'border-white');
     compareControl.classList.add('bg-green-500', 'border-black');
     main.classList.add('md:grid', 'md:grid-cols-2', 'md:gap-4');
@@ -66,7 +66,7 @@ export function toggleCompare() {
     inputDivRight.classList.remove('sm:mb-32');
     photosControl.classList.remove('md:inline');
   } else {
-    //off
+    // off
     compareControl.classList.remove('bg-green-500', 'border-black');
     compareControl.classList.add('bg-blue-500', 'border-white');
     main.classList.remove('md:grid', 'md:grid-cols-2', 'md:gap-4');
@@ -106,7 +106,7 @@ export function togglePhotos() {
     iconLeft.classList.remove('sm:-translate-y-24', 'sm:w-40');
     iconLeft.classList.add('lg:-translate-y-24', 'lg:w-40');
   } else {
-    //off
+    // off
     photosControl.classList.remove('bg-green-500', 'border-black');
     photosControl.classList.add('bg-blue-500', 'border-white');
     main.classList.remove('md:grid', 'md:grid-cols-2', 'md:gap-4');

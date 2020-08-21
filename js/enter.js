@@ -1,7 +1,7 @@
 // Handle enter key push
 export default function userPushEnter() {
   const html = document.querySelector('html');
-  html.addEventListener('keyup', function (enter) {
+  html.addEventListener('keyup', (enter) => {
     // Number 13 is the "Enter" key on the keyboard
     if (enter.keyCode === 13) {
       enter.preventDefault();

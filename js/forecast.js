@@ -1,5 +1,5 @@
-import windDir from './wind.js';
-import toggleAlert from './alert.js';
+import windDir from './wind';
+import toggleAlert from './alert';
 
 export default async function printForecast(forecast, city, id) {
   // Wait for Data from API
@@ -114,6 +114,6 @@ export default async function printForecast(forecast, city, id) {
       (segment.onclick = () => {
         alertMsg.innerHTML = alertMessage[i];
         toggleAlert('on');
-      })
+      }),
   );
 }

@@ -1,5 +1,5 @@
-import windDir from './wind.js';
-import setCity from './city.js';
+import windDir from './wind';
+import setCity from './city';
 
 export default async function printWeather(weather, forecast, id) {
   // Wait for Data from API
@@ -20,58 +20,58 @@ export default async function printWeather(weather, forecast, id) {
   const icon = await weatherData.weather[0].icon;
   const src = 'images/status/';
   switch (icon) {
-    case '01d': //day: clear sky
+    case '01d': // day: clear sky
       weatherIcon.src = `${src}sun.svg`;
       break;
-    case '01n': //night: clear sky
+    case '01n': // night: clear sky
       weatherIcon.src = `${src}night-cloud-full.svg`;
       break;
-    case '02d': //day: few clouds
+    case '02d': // day: few clouds
       weatherIcon.src = `${src}cloud-sun.svg`;
       break;
-    case '02n': //night: few clouds
+    case '02n': // night: few clouds
       weatherIcon.src = `${src}night-cloud-half.svg`;
       break;
-    case '03d': //day: scattered clouds
+    case '03d': // day: scattered clouds
       weatherIcon.src = `${src}clouds.svg`;
       break;
-    case '03n': //night: scattered clouds
+    case '03n': // night: scattered clouds
       weatherIcon.src = `${src}night-cloud-half.svg`;
       break;
-    case '04d': //day: broken clouds
+    case '04d': // day: broken clouds
       weatherIcon.src = `${src}clouds.svg`;
       break;
-    case '04n': //night: broken clouds
+    case '04n': // night: broken clouds
       weatherIcon.src = `${src}night-cloud-half.svg`;
       break;
-    case '09d': //day: shower rain
+    case '09d': // day: shower rain
       weatherIcon.src = `${src}rain.svg`;
       break;
-    case '09n': //night: shower rain
+    case '09n': // night: shower rain
       weatherIcon.src = `${src}rain.svg`;
       break;
-    case '10d': //day: light rain
+    case '10d': // day: light rain
       weatherIcon.src = `${src}rain-cloud-sun.svg`;
       break;
-    case '10n': //night: light rain
+    case '10n': // night: light rain
       weatherIcon.src = `${src}rain.svg`;
       break;
-    case '11d': //day: thunderstorm
+    case '11d': // day: thunderstorm
       weatherIcon.src = `${src}thunder-storm.svg`;
       break;
-    case '11n': //night: thunderstorm
+    case '11n': // night: thunderstorm
       weatherIcon.src = `${src}thunder-storm.svg`;
       break;
-    case '13d': //day: snow
+    case '13d': // day: snow
       weatherIcon.src = `${src}snowy.svg`;
       break;
-    case '13n': //night: snow
+    case '13n': // night: snow
       weatherIcon.src = `${src}snowy.svg`;
       break;
-    case '50d': //day: fog
+    case '50d': // day: fog
       weatherIcon.src = `${src}fog.svg`;
       break;
-    case '50n': //night: fog
+    case '50n': // night: fog
       weatherIcon.src = `${src}fog-night.svg`;
       break;
     default:
