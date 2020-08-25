@@ -2,8 +2,19 @@
 # foldername/    (Folder ignored)
 # *.ext          (Extention ingored)
 
-#MACOS
-*.DS_store
+# MACOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-#EXCLUDES
+# EXCLUDES
 node_modules/
+
+# WEBPACK
+coverage/
+.cache/
+*.log

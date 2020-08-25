@@ -1,3 +1,5 @@
+import places from './places';
+
 (() => {
   let placesAutocompleteLeft = places({
     appId: 'plYSY0KWZ9PR',

@@ -1,3 +1,6 @@
+import '../css/index.css';
+import './search';
+
 import userPushEnter from './enter';
 import unsetControls from './controls';
 import setPreviousCity from './city';

@@ -2,10 +2,11 @@
   "name": "modern-javascript-application",
   "version": "1.0.0",
   "description": "[**Live Version**](https://wisecoding.github.io/modern-javascript-application/) - [Project](https://github.com/WiseCoding/modern-javascript-application/projects/1)",
-  "main": "index.js",
+  "main": "postcss.config.js",
   "scripts": {
-    "tailwind": "postcss tailwind.css -o styles/index.css",
-    "webpack": "webpack"
+    "tailwind": "postcss tailwind.css -o src/css/index.css",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,22 @@
     "url": "https://github.com/WiseCoding/modern-javascript-application/issues"
   },
   "homepage": "https://github.com/WiseCoding/modern-javascript-application#readme",
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.2.2",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.2.1",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.2"
+  },
   "dependencies": {
     "@tailwindcss/typography": "^0.2.0",
     "@tailwindcss/ui": "^0.5.0",
@@ -25,13 +42,5 @@
     "postcss-cli": "^7.1.1",
     "postcss-import": "^12.0.1",
     "tailwindcss": "^1.7.3"
-  },
-  "devDependencies": {
-    "eslint": "^7.7.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
   }
 }

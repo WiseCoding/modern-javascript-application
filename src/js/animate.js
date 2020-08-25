@@ -1,6 +1,6 @@
 export default function animInputBox(id) {
   // Sound
-  const audio = new Audio('audio/tick.mp3');
+  const audio = new Audio('../audio/tick.mp3');
   audio.play();
   // Animate
   document.querySelector(`#inputDiv${id}`).classList.add('animate-bounce');
