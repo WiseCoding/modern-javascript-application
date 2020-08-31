@@ -3,7 +3,7 @@ import './search';
 
 import userPushEnter from './enter';
 import unsetControls from './controls';
-import setPreviousCity from './city';
+import { setPreviousCity } from './city';
 import animInputBox from './animate';
 import { toggleForecast, toggleCompare, togglePhotos } from './toggle';
 import { errors, getWeather, getForecast, getPhotos } from './fetch';

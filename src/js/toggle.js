@@ -1,9 +1,5 @@
 // Forecast Section
 export function toggleForecast() {
-  // audio
-  const audioWhoop = new Audio('../audio/whoop.mp3');
-  audioWhoop.play();
-
   const forecastControl = document.querySelector('#forecastControl');
   const forecastCheck = document.querySelector('#forecastCheck');
   const forecastBoxLeft = document.querySelector('#forecastLeft');
@@ -34,10 +30,6 @@ export function toggleForecast() {
 }
 // Compare Section
 export function toggleCompare() {
-  // audio
-  const audioWhoop = new Audio('../audio//whoop.mp3');
-  audioWhoop.play();
-
   // Open/Close compareDiv on click
   const main = document.querySelector('main');
   const compareControl = document.querySelector('#compareControl');
@@ -82,10 +74,6 @@ export function toggleCompare() {
 }
 // Photos Section
 export function togglePhotos() {
-  // audio
-  const audioWhoop = new Audio('../audio/whoop.mp3');
-  audioWhoop.play();
-
   const main = document.querySelector('main');
   const photosBox = document.querySelector('#photosBox');
   const photosControl = document.querySelector('#photosControl');

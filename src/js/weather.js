@@ -1,5 +1,5 @@
+import { setCity } from './city';
 import windDir from './wind';
-import setCity from './city';
 
 //import images
 import STATUS_SUN from '../img/status/sun.svg';
@@ -23,6 +23,7 @@ export default async function printWeather(weather, forecast, id) {
   // City Name
   const cityName = await weatherData.name;
   const countryCode = await weatherData.sys.country;
+  console.log(cityName, countryCode, id);
   setCity(cityName, countryCode, id);
 
   // Show WeatherBox
@@ -32,7 +33,6 @@ export default async function printWeather(weather, forecast, id) {
   // WEATHER ICON SWAP
   const weatherIcon = document.querySelector(`#weatherIcon${id}`);
   const icon = await weatherData.weather[0].icon;
-  const src = '../img/status/';
   switch (icon) {
     case '01d': // day: clear sky
       weatherIcon.src = STATUS_SUN;

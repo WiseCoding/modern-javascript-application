@@ -1,4 +1,4 @@
-// Save/Update submitted city in local storage
+// Get previous city from local storage
 export function getCity(id) {
   if (localStorage.getItem(`Prev City ${id}`) !== null) {
     const city = localStorage.getItem(`Prev City ${id}`).toString();
@@ -6,13 +6,14 @@ export function getCity(id) {
   }
 }
 
-// Get previous city from local storage
+// Save/Update submitted city in local storage
 export function setCity(city, country, id) {
+  console.log('settttCity run');
   localStorage.setItem(`Prev City ${id}`, `${city}, ${country}`);
 }
 
 // Set previous city name in input fields
-export default function setPreviousCity() {
+export function setPreviousCity() {
   // Check previous city, if set, add to input field
   if (localStorage.getItem('Prev City Left') !== null) {
     getCity('Left');

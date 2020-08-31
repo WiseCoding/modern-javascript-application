@@ -5,7 +5,7 @@
   "main": "postcss.config.js",
   "scripts": {
     "tailwind": "postcss tailwind.css -o src/css/index.css",
-    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js --progress --colors",
     "build": "webpack --config webpack.prod.js"
   },
   "repository": {
