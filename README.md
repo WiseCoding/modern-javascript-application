@@ -1,6 +1,6 @@
 # Modern JavaScript App 🌪
 
-[**GH Pages**](https://wisecoding.github.io/modern-javascript-application/) - [**Netlify**](https://modern-js-app.netlify.app/)
+[**GH Pages**](https://mattiasbonte.github.io/modern-javascript-application/) - [**Netlify**](https://modern-js-app.netlify.app/)
 
 # Assignment 📝
 
@@ -18,7 +18,7 @@
 
 # The Team 👥
 
-- [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
+- [👨🏼‍💻Mattias](https://github.com/mattiasbonte/)
 
 # Built with 🛠
 
@@ -28,7 +28,7 @@
 
 # Project Management 🔎
 
-- [GitHub Projects](https://github.com/WiseCoding/modern-javascript-application/projects/1)
+- [GitHub Projects](https://github.com/mattiasbonte/modern-javascript-application/projects/1)
 
 # License 📎
 
